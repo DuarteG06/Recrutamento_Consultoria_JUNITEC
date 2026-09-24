@@ -33,14 +33,28 @@ def get_employees() -> list:
     return employees
 
 
-def get_access_policy() -> str:
-    """Devolve a access policy que se encontra em access_policy.md"""
-    filepath = os.path.join(DATA_DIR, "access_policy.md")
+def get_expenses_policy() -> str:
+    """Devolve a política de gastos da empresa que se encontra em expenses_policy.md"""
+    filepath = os.path.join(DATA_DIR, "expenses_policy.md")
     try:
         with open(filepath, 'r', encoding='utf-8') as file:
             return file.read()
     except FileNotFoundError:
-        return "Error: Não foi possível localizar as politicas da empresa em access_policy."
+        return "Error: Não foi possível localizar as políticas de gastos da empresa em expenses_policy."
+
+def get_tasks() -> list:
+    """Devolve todas as tarefas da empresa."""
+    filepath = os.path.join(DATA_DIR, "tasks.json")
+    try:
+        with open(filepath, 'r', encoding='utf-8') as file:
+            tasks = json.load(file)
+    except FileNotFoundError:
+        return "Error: Não foi possível localizar as tarefas da empresa em tasks.json."
+
+    return tasks
+
+    
+
 
 
 
