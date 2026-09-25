@@ -3,7 +3,7 @@ from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 
-from data_loader import get_employee_info, get_employees, get_expenses_policy, get_tasks
+from data_loader import get_employee_info, get_employees, get_expenses_policy, get_tasks, get_employee_tasks
 
 load_dotenv()
 
@@ -19,12 +19,12 @@ system_instruction = (
 # A configuração agora é feita num objeto próprio
 config = types.GenerateContentConfig(
     system_instruction=system_instruction,
-    tools=[get_employee_info, get_employees, get_expenses_policy, get_tasks],
+    tools=[get_employee_info, get_employees, get_expenses_policy, get_tasks, get_employee_tasks],
 )
 
 # Inicia a sessão de chat
 chat = client.chats.create(
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash-lite",
     config=config
 )
 

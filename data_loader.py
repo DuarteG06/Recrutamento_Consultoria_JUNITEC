@@ -22,6 +22,33 @@ def get_employee_info(name: str) -> list:
     
     return results
 
+def get_tasks() -> list:
+    """Devolve todas as tarefas da empresa."""
+    filepath = os.path.join(DATA_DIR, "tasks.json")
+    try:
+        with open(filepath, 'r', encoding='utf-8') as file:
+            tasks = json.load(file)
+    except FileNotFoundError:
+        return [{"Error: Não foi possível localizar as tarefas da empresa em tasks.json."}]
+
+    return tasks
+
+def get_employee_tasks(employee_id: str)-> list:
+    """Devolve todas as tarefas de um trabalhador."""
+    filepath = os.path.join(DATA_DIR, "tasks.json")
+    try:
+        with open(filepath, 'r', encoding='utf-8') as file:
+            tasks = json.load(file)
+    except FileNotFoundError:
+        return [{"Error: Não foi possível localizar as tarefas da empresa em tasks.json."}]
+
+    employee_tasks = [task for task in tasks if employee_id == task.get("assignee_id", "")]
+
+    if not employee_tasks:
+        return [{"mensagem": f"Nenhuma tarefa encontrada para o trabalhador com id '{employee_id}'."}]
+
+    return employee_tasks
+
 def get_employees() -> list:
     """Devolve todas as informações de todos os trabalhadores em sistema."""
     filepath = os.path.join(DATA_DIR, "employees.json")
@@ -42,16 +69,6 @@ def get_expenses_policy() -> str:
     except FileNotFoundError:
         return "Error: Não foi possível localizar as políticas de gastos da empresa em expenses_policy."
 
-def get_tasks() -> list:
-    """Devolve todas as tarefas da empresa."""
-    filepath = os.path.join(DATA_DIR, "tasks.json")
-    try:
-        with open(filepath, 'r', encoding='utf-8') as file:
-            tasks = json.load(file)
-    except FileNotFoundError:
-        return "Error: Não foi possível localizar as tarefas da empresa em tasks.json."
-
-    return tasks
 
     
 

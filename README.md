@@ -5,7 +5,7 @@ No entanto por concluir que a sua performance poderia ficar abaixo das minhas ex
 ## Solução principal
 O agente criado ligado ao gemini-2.5-flash através de uma API key tem acesso às seguintes funções:
 - `get_tasks()` - Devolve todas as tasks atuais.
-- `get_employee_tasks(name: str)` - Todas as tarefas de um certo trabalhador.
+- `get_employee_tasks(employee_id: str)` - Todas as tarefas de um certo trabalhador.
 - `get_employees()` - Devolve todos os trabalhadores, usada quando se quer relacionar um trabalhador a uma tarefa.
 - `get_expenses_policy()` - Devolve a politica de gastos pois algumas tarefas têm custos e o user pode querer algum tipo de explicação.
 
