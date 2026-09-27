@@ -3,25 +3,6 @@ import os
 
 DATA_DIR = "data"
 
-# O type hint (name: str) e a Docstring ("""...""") são OBRIGATÓRIOS 
-# para o Gemini perceber quando e como usar esta função.
-def get_employee_info(name: str) -> list:
-    """Procura informações de um funcionário no sistema da empresa através do seu nome."""
-    filepath = os.path.join(DATA_DIR, "employees.json")
-    try:
-        with open(filepath, 'r', encoding='utf-8') as file:
-            employees = json.load(file)
-    except FileNotFoundError:
-        return [{"error": "Ficheiro employees.json não encontrado."}]
-    
-    # Pesquisa ignorando maiúsculas/minúsculas
-    results = [emp for emp in employees if name.lower() in emp.get("name", "").lower()]
-    
-    if not results:
-        return [{"mensagem": f"Nenhum funcionário encontrado com o nome '{name}'."}]
-    
-    return results
-
 def get_tasks() -> list:
     """Devolve todas as tarefas da empresa."""
     filepath = os.path.join(DATA_DIR, "tasks.json")
@@ -70,6 +51,33 @@ def get_expenses_policy() -> str:
         return "Error: Não foi possível localizar as políticas de gastos da empresa em expenses_policy."
 
 
+def get_available_files() -> list:
+    """Devolve uma lista com todos os ficheiros da empresa disponíveis."""
+    try:
+        return os.listdir(DATA_DIR)
+    except FileNotFoundError:
+        return ["Erro: A pasta de dados não foi encontrada."]
+
+    
+
+def open_file(filename: str) -> str:
+    """Lê o ficheiro pedido e devolve o seu conteúdo."""
+
+    filepath = os.path.join(DATA_DIR, filename)
+
+    try:
+        if filename.endswith(".json"):
+            with open(filepath, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+                return json.dumps(data, indent=2, ensure_ascii=False)
+        elif filename.endswith(".md") or filename.endswith(".txt"):
+            with open(filepath, 'r', encoding='utf-8') as file:
+                return file.read()
+        else:
+            return f"Erro: Formato de ficheiro não suportado para '{filename}'."
+    except FileNotFoundError:
+        return f"Erro: O ficheiro '{filename}' não existe na pasta de dados."
+      
     
 
 
@@ -77,7 +85,3 @@ def get_expenses_policy() -> str:
 
 
 
-    
-# adicionar mais funções aqui, por exemplo:
-# def get_pending_tasks(employee_id: str) -> list:
-#    ...

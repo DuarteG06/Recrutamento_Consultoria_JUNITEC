@@ -11,7 +11,7 @@ def main():
     while True:
         user_input = console.input("[bold green]Tu:[/bold green] ")
         
-        if user_input.lower() in ['sair', 'exit', 'quit']:
+        if user_input.lower() in ['sair', 'exit', 'quit', 'adeus', 'bye']:
             console.print("[bold yellow]A encerrar o assistente... Até logo![/bold yellow]")
             break
             
@@ -22,11 +22,8 @@ def main():
         
         try:
             response_stream = send_message_stream(user_input)
-            
-            # Iteramos sobre os pedaços da resposta em tempo real
+
             for chunk in response_stream:
-                # Em vez de ler 'chunk.text' diretamente (que gera o aviso),
-                # verificamos as partes internas (parts) e imprimimos apenas as que têm texto.
                 if chunk.parts:
                     for part in chunk.parts:
                         if part.text:

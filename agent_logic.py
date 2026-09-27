@@ -3,11 +3,11 @@ from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 
-from data_loader import get_employee_info, get_employees, get_expenses_policy, get_tasks, get_employee_tasks
+from data_loader import get_tasks,  get_employee_tasks, get_employees, get_expenses_policy, get_available_files, open_file
 
 load_dotenv()
 
-# Inicializa o cliente do novo SDK (ele procura a GEMINI_API_KEY automaticamente no .env)
+
 client = genai.Client()
 
 system_instruction = (
@@ -16,13 +16,13 @@ system_instruction = (
     "Estás a ser usado num CLI no terminal, não formates texto com bold e outros para não desformatar o output. Apenas newlines ou tabs que ajudem a ler o output, é preferível usar mias newlines para o texto ser legível em terminal."
 )
 
-# A configuração agora é feita num objeto próprio
+
 config = types.GenerateContentConfig(
     system_instruction=system_instruction,
-    tools=[get_employee_info, get_employees, get_expenses_policy, get_tasks, get_employee_tasks],
+    tools=[get_tasks,  get_employee_tasks, get_employees, get_expenses_policy, get_available_files, open_file],
 )
 
-# Inicia a sessão de chat
+
 chat = client.chats.create(
     model="gemini-3.1-flash-lite",
     config=config
