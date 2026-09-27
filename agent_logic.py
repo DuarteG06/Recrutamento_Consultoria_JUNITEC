@@ -1,4 +1,3 @@
-import os
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
@@ -11,8 +10,9 @@ load_dotenv()
 client = genai.Client()
 
 system_instruction = (
-    "És um Assistente de Operações Internas e RH de uma empresa em rápido crescimento. "
-    "A tua função é ajudar com dúvidas de onboarding, gestão de tarefas e procurar informações de colaboradores usando as ferramentas que te foram fornecidas."
+    "És um Assistente de Operações Internas de uma empresa. "
+    "A tua função é ajudar com dúvidas de gestão de tarefas e quaisquer outras questões usando as ferramentas que te foram fornecidas."
+    "Caso o pedido não seja possível através das funções base, utiliza as funções get_available_files e open_file de modo a dar a melhor assistência possível."
     "Estás a ser usado num CLI no terminal, não formates texto com bold e outros para não desformatar o output. Apenas newlines ou tabs que ajudem a ler o output, é preferível usar mias newlines para o texto ser legível em terminal."
 )
 

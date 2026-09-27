@@ -18,3 +18,21 @@ Deste modo implementei as seguintes funções que apenas são usadas em casos li
 
 Esta função de abrir qualquer ficheiro pelo nome só é usada em casos necessário, pois assim evitamos usar constatemente o get_available_files(), o que permite poupar tokens.
 
+
+## Como correr o projeto
+## Como instalar e correr o projeto
+
+1- Criar um ambiente virtual:
+   `python3 -m venv venv`
+   `source venv/bin/activate`
+
+2- Instalar as dependências:
+   `pip install -r requirements.txt`
+
+3- Configurar a API Key:
+   Criar um ficheiro `.env` na raiz do projeto e adiciona a tua chave do modelo (Gemini no meu exemplo):
+   `GEMINI_API_KEY=API_KEY`
+
+4- Executar o agente:
+   `python agent.py`
+

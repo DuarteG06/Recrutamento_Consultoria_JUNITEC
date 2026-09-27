@@ -79,9 +79,3 @@ def open_file(filename: str) -> str:
         return f"Erro: O ficheiro '{filename}' não existe na pasta de dados."
       
     
-
-
-
-
-
-
